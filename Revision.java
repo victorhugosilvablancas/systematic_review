@@ -3,6 +3,8 @@ package hugosql.systematic_review;
 import java.io.BufferedReader;
 import java.io.FileReader; 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -45,6 +47,7 @@ public class Revision {
             "year",
             "methodology",
             "typemethology",
+            "category",
             "solved",
             "quantitysolved",
             "notsolved",
@@ -58,14 +61,14 @@ public class Revision {
         }
         return mitabla;
     }
-    public String[] CabezaResults=new String[0];
-    public String[][] TablaResults() {
-        CabezaResults=new String[] {
+    public String[] CabezaVariables=new String[0];
+    public String[][] TablaVariables() {
+        CabezaVariables=new String[] {
             "Variable Tipo",
             "Nombre",
             "Valor",
         };
-        String[][] mitabla=new String[Revisiondata.VARIABLE_MAX][CabezaResults.length];
+        String[][] mitabla=new String[Revisiondata.VARIABLE_MAX][CabezaVariables.length];
         for (int i=0;i<Revisiondata.VARIABLE_MAX;i++) {
             mitabla[i][0]=Revisiondata.variables_tipos[i];
             mitabla[i][1]=Revisiondata.variables_nombres[i];
@@ -87,6 +90,97 @@ public class Revision {
                     break;
             }
         }
+        return mitabla;
+    }
+    public String[] CabezaMetodologias=new String[0];
+    public String[][] TablaMetodologias() {
+        CabezaMetodologias=new String[] {
+            "Category",
+            "Methodology",
+            "Sum",
+        };
+        String[][] mitabla=new String[0][CabezaMetodologias.length];
+        if (Revisiondata.listarevisiones.size()>0) {
+            Revisiondata midato=new Revisiondata();
+            List<Revisiondata> milista=new ArrayList<>();
+            milista=Revisiondata.listarevisiones;
+            
+            milista.sort(new Comparator<Revisiondata>() {
+                @Override
+                public int compare(Revisiondata o1, Revisiondata o2) {
+                    return o1.typemethology.compareTo(o1.typemethology);
+                }
+            });
+            List<String> resultado=new ArrayList<>();
+            String acate="XXX";
+            String ameto="XXX";
+            Integer cantidad=0;
+            Boolean primera=true;
+            for (int i=0;i<milista.size();i++) {
+                midato=milista.get(i);
+                if (!ameto.equals(midato.typemethology)) {
+                    if (primera) {
+                        primera=false;
+                    } else {
+                        resultado.add(acate+","+ameto+","+cantidad);
+                    }
+                    acate=midato.category;
+                    ameto=midato.typemethology.replace("|", " ");
+                    cantidad=0;
+                }
+                cantidad++;
+            } //for
+            resultado.add(acate+","+ameto+","+cantidad);
+            if (resultado.size()>0) {
+                int r=resultado.size();
+                mitabla=new String[r][CabezaMetodologias.length];
+                for (int j=0;j<r;j++) mitabla[j]=resultado.get(j).split(",");
+            }
+        } //size>0
+        return mitabla;
+    }
+    public String[] CabezaCategorias=new String[0];
+    public String[][] TablaCategorias() {
+        CabezaCategorias=new String[] {
+            "Category",
+            "Sum",
+        };
+        String[][] mitabla=new String[0][CabezaCategorias.length];
+        if (Revisiondata.listarevisiones.size()>0) {
+            Revisiondata midato=new Revisiondata();
+            List<Revisiondata> milista=new ArrayList<>();
+            milista=Revisiondata.listarevisiones;
+            
+            milista.sort(new Comparator<Revisiondata>() {
+                @Override
+                public int compare(Revisiondata o1, Revisiondata o2) {
+                    return o1.category.compareTo(o1.category);
+                }
+            });
+            List<String> resultado=new ArrayList<>();
+            String acate="XXX";
+            Integer cantidad=0;
+            Boolean primera=true;
+            for (int i=0;i<milista.size();i++) {
+                midato=milista.get(i);
+                if (!acate.equals(midato.category)) {
+                    if (primera) {
+                        primera=false;
+                    } else {
+                        resultado.add(acate+","+cantidad);
+                    }
+                    acate=midato.category.replace("|", " ");
+                    cantidad=0;
+                }
+                cantidad++;
+            } //for
+            resultado.add(acate+","+cantidad);
+            if (resultado.size()>0) {
+                int r=resultado.size();
+                mitabla=new String[r][CabezaCategorias.length];
+                for (int j=0;j<r;j++) mitabla[j]=resultado.get(j).split(",");
+            }
+        } //size>0
         return mitabla;
     }
 

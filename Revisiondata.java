@@ -13,6 +13,7 @@ public class Revisiondata {
     public Integer year;
     public String methodology;
     public String typemethology;
+    public String category;
     public String solved;
     public Integer quantitysolved;
     public String notsolved;
@@ -27,6 +28,7 @@ public class Revisiondata {
         year=0;
         methodology="";
         typemethology="";
+        category="";
         solved="";
         quantitysolved=0;
         notsolved="";
@@ -39,10 +41,11 @@ public class Revisiondata {
         year=Integer.valueOf(partes[2]);
         methodology=partes[3];
         typemethology=partes[4];
-        solved=partes[5];
-        quantitysolved=Integer.valueOf(partes[6]);
-        notsolved=partes[7];
-        quantitynotsolved=Integer.valueOf(partes[8]);
+        category=partes[5];
+        solved=partes[6];
+        quantitysolved=Integer.valueOf(partes[7]);
+        notsolved=partes[8];
+        quantitynotsolved=Integer.valueOf(partes[9]);
     }
     public String cadena() {
         return id+"\t"
@@ -50,6 +53,7 @@ public class Revisiondata {
                 + year+"\t"
                 + methodology+"\t"
                 + typemethology+"\t"
+                + category+"\t"
                 + solved+"\t"
                 + quantitysolved+"\t"
                 + notsolved+"\t"
@@ -96,7 +100,7 @@ public class Revisiondata {
         for (int i=0;i<Revisiondata.listarevisiones.size();i++) {
             midato=Revisiondata.listarevisiones.get(i);
             //provisional
-            cadena=midato.methodology;
+            cadena=midato.typemethology;
         }
         return cadena;
     }
