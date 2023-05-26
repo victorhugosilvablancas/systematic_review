@@ -82,48 +82,31 @@ public class Revisiondata {
         "Problemas Irresolutos",
     };
 
+    /**
+    retrieve periods mode
+    **/
     public static String getPeriodosModa() {
-        String cadena="";
-        Revisiondata midato=new Revisiondata();
-        
-        for (int i=0;i<Revisiondata.listarevisiones.size();i++) {
-            midato=Revisiondata.listarevisiones.get(i);
-            //provisional
-            cadena=String.valueOf(midato.year);
-        }
-        return cadena;
+        //code
     }
+    
+    /**
+    reetrive methodologies
+    **/
     public static String getMetodologias() {
-        String cadena="";
-        Revisiondata midato=new Revisiondata();
-        
-        for (int i=0;i<Revisiondata.listarevisiones.size();i++) {
-            midato=Revisiondata.listarevisiones.get(i);
-            //provisional
-            cadena=midato.typemethology;
-        }
-        return cadena;
+        //code
     }
+    
+    /**
+    retrieve methodologies solved
+    **/
     public static String getResueltas() {
-        String cadena="";
-        Revisiondata midato=new Revisiondata();
-        Integer iresueltas=0;
-        for (int i=0;i<Revisiondata.listarevisiones.size();i++) {
-            midato=Revisiondata.listarevisiones.get(i);
-            iresueltas+=midato.quantitysolved;
-        }
-        cadena=String.valueOf(iresueltas);
-        return cadena;
+        //code
     }
+    
+    /**
+    retrieve methodologies not solved
+    **/
     public static String getIrresolutas() {
-        String cadena="";
-        Revisiondata midato=new Revisiondata();
-        Integer iresueltas=0;
-        for (int i=0;i<Revisiondata.listarevisiones.size();i++) {
-            midato=Revisiondata.listarevisiones.get(i);
-            iresueltas+=midato.quantitynotsolved;
-        }
-        cadena=String.valueOf(iresueltas);
-        return cadena;
+        //code
     }
 }
